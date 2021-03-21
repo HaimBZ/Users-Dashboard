@@ -1,0 +1,49 @@
+body {
+    background-color: $background-color;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    nav {
+        margin-bottom: 2em;
+    }
+    form {
+        width: 20rem;
+        margin: 2em auto 0;
+        &.edit-user {
+            width: auto;
+            margin: auto;
+        }
+        .card {
+            padding: 1.5em;
+            border-radius: 10px;
+            background-color: $login-form-bg;
+        }
+        .form-group {
+            position: relative;
+            &.has-error {
+                input {
+                    background-color: rgba(252, 3, 28, 0.1);                    
+                    border: 2px solid $error-color;
+                    outline: 0;
+                }
+            }
+            .badge {
+                position: absolute;
+                right: 0;
+                top: 0;
+                padding-left: 6px;
+                &:before {
+                    height: 15px;
+                    content: ' ';
+                    background: $error-color;
+                    width: 13px;
+                    height: 13px;
+                    position: absolute;
+                    transform: rotate(45deg);
+                    left: -5px;
+                    bottom: 3px;
+                    z-index: 0;
+                    border-radius: 5px 10px 3px 4px;
+                }
+            }
+        }
+    }
+}
