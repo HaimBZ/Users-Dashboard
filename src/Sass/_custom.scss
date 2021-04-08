@@ -31,7 +31,6 @@ body {
                 top: 0;
                 padding-left: 6px;
                 &:before {
-                    height: 15px;
                     content: ' ';
                     background: $error-color;
                     width: 13px;

@@ -5,6 +5,10 @@ table.sortable {
         th {
             text-align: left;
             border-bottom: 2px solid black;
+            width: 23%;
+            &:first-child {
+                width: 8%;
+            }
         }
         button {
             border: 0;

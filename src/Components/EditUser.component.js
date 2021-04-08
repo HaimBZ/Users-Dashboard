@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import {
   Container,
   Form,
@@ -7,13 +7,18 @@ import {
   FormControl,
   Button,
   Badge
-} from 'react-bootstrap';
+} from "react-bootstrap";
+import moment from "moment";
 
 const EditUser = (props) => {
   const [user, setUser] = useState(props.currentUser);
   useEffect(() => {
     setUser(props.currentUser);
   }, [props]);
+
+  const dateFormatter = (date) => {
+    return moment(date).format("DD/MM/YYYY");
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -23,26 +28,22 @@ const EditUser = (props) => {
 
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data) => {
-    // data is true when form is valid
     if (data) {
       props.updateUser();
     }
   };
-  
+
   return (
     <Container>
       <Form
         id="editUserForm"
         onSubmit={handleSubmit(onSubmit)}
-        className="edit-user">
+        className="edit-user"
+      >
         <FormGroup>
-          <FormControl
-            type="hidden"
-            name="id"
-            value={user.id}
-          />
+          <FormControl type="hidden" name="id" value={user.id} />
         </FormGroup>
-        <FormGroup className={errors.firstName && 'has-error'}>
+        <FormGroup className={errors.firstName && "has-error"}>
           <FormControl
             type="text"
             name="firstName"
@@ -50,11 +51,11 @@ const EditUser = (props) => {
             autoComplete="off"
             defaultValue={user.firstName}
             onChange={handleInputChange}
-            ref={register({required: true})}
+            ref={register({ required: true })}
           />
           {errors.firstName && <Badge variant="danger">Required Field</Badge>}
         </FormGroup>
-        <FormGroup className={errors.lastName && 'has-error'}>
+        <FormGroup className={errors.lastName && "has-error"}>
           <FormControl
             type="text"
             name="lastName"
@@ -62,23 +63,23 @@ const EditUser = (props) => {
             autoComplete="off"
             defaultValue={user.lastName}
             onChange={handleInputChange}
-            ref={register({required: true})}
+            ref={register({ required: true })}
           />
           {errors.lastName && <Badge variant="danger">Required Field</Badge>}
         </FormGroup>
-        <FormGroup className={errors.date && 'has-error'}>
+        <FormGroup className={errors.date && "has-error"}>
           <FormControl
             type="text"
             name="date"
             placeholder="Date"
             autoComplete="off"
-            defaultValue={user.date}
+            defaultValue={dateFormatter(user.date)}
             onChange={handleInputChange}
-            ref={register({required: true})}
+            ref={register({ required: true })}
           />
           {errors.date && <Badge variant="danger">Required Field</Badge>}
         </FormGroup>
-        <FormGroup className={errors.phone && 'has-error'}>
+        <FormGroup className={errors.phone && "has-error"}>
           <FormControl
             type="text"
             name="phone"
@@ -86,18 +87,16 @@ const EditUser = (props) => {
             autoComplete="off"
             defaultValue={user.phone}
             onChange={handleInputChange}
-            ref={register({required: true})}
+            ref={register({ required: true })}
           />
           {errors.phone && <Badge variant="danger">Required Field</Badge>}
         </FormGroup>
-        <Button
-          type="submit"
-          style={{ marginRight: "1em" }}
-          variant="primary"
-        >
+        <Button type="submit" style={{ marginRight: "1em" }} variant="primary">
           Update user
-      </Button>
-        <Button onClick={() => props.setEditing(false)} variant="light">Cancel</Button>
+        </Button>
+        <Button onClick={() => props.setEditing(false)} variant="light">
+          Cancel
+        </Button>
       </Form>
     </Container>
   );
